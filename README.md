@@ -2,6 +2,10 @@
 
 A quiet, typographic Hexo theme: warm paper palette, serif display type, a numbered "Recent Writing" index, a side table of contents on articles, an essays timeline and ⌘K search. Light and dark modes follow the system and can be toggled.
 
+![Home page in light mode](screenshots/home.png)
+
+![Article page in dark mode, with the side table of contents](screenshots/post-dark.png)
+
 ## Install
 
 Clone into your blog's `themes/` folder (or symlink a local checkout there):
