@@ -42,7 +42,6 @@ Override any key from the theme's [`_config.yml`](./_config.yml) in a `_config.v
 The home hero decoration is set with `home.decor`:
 
 - `print` (default): a printer's proof sheet, with crop marks, registration marks, a faint baseline grid, a color bar and a slug line
-- `pixel`: a fading dot grid and a large duotone pixel figure (a One Punch Man homage) behind the hero
 - `none`: no decoration
 
 ## Pages

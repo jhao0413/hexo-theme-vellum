@@ -501,7 +501,6 @@ p { text-wrap: pretty; }
   color: var(--faint);
 }
 .hero-print { padding-bottom: 88px; }
-.hero-pixel { padding-bottom: 24px; }
 .decor-print { padding-block: 8px; }
 .crop { position: absolute; width: 18px; height: 18px; pointer-events: none; }
 .crop::before, .crop::after { content: ""; position: absolute; background: var(--faint); opacity: .8; }
@@ -915,31 +914,3 @@ p { text-wrap: pretty; }
 .gt-container .gt-btn { border-color: var(--accent) !important; background: var(--accent) !important; }
 .gt-container a, .gt-container .gt-link { color: var(--accent) !important; }
 .gt-container .gt-header-textarea { background: var(--soft) !important; color: var(--ink) !important; }
-
-/* Decor: pixel — a dot grid and a large duotone pixel figure behind the hero */
-.hero-pixel { padding-bottom: 64px; }
-.px-dots {
-  position: absolute;
-  inset: 0;
-  background-image: radial-gradient(color-mix(in srgb, var(--faint) 45%, transparent) 1px, transparent 1.4px);
-  background-size: 14px 14px;
-  -webkit-mask-image: radial-gradient(ellipse 70% 80% at 50% 40%, #000, transparent 75%);
-  mask-image: radial-gradient(ellipse 70% 80% at 50% 40%, #000, transparent 75%);
-  opacity: .7;
-}
-.px-figure {
-  position: absolute;
-  right: max(-24px, calc(50% - 600px));
-  bottom: -18px;
-  width: 200px;
-  height: auto;
-  transform: scaleX(-1);
-  --tone-ink: color-mix(in srgb, var(--ink) 22%, var(--bg));
-  --tone-mid: color-mix(in srgb, var(--ink) 11%, var(--bg));
-  --tone-light: color-mix(in srgb, var(--ink) 5%, var(--bg));
-}
-.px-figure rect { fill: var(--tone-light); }
-.px-figure .px-k, .px-figure .px-b { fill: var(--tone-ink); }
-.px-figure .px-y, .px-figure .px-r, .px-figure .px-g { fill: var(--tone-mid); }
-@media (max-width: 960px) { .px-figure { width: 150px; right: -32px; opacity: .8; } }
-@media (max-width: 560px) { .px-figure { width: 110px; right: -28px; bottom: -12px; opacity: .6; } }
