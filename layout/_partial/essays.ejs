@@ -1,0 +1,16 @@
+<% const essays = jiu_essays(); %>
+<div class="wrap narrow">
+  <header class="page-header">
+    <h1 class="page-title"><%= page.title %></h1>
+    <p class="page-sub"><%= essays.length %> notes</p>
+  </header>
+  <% if (page.content && page.content.trim()) { %><div class="prose"><%- page.content %></div><% } %>
+  <ul class="essay-list timeline">
+    <% essays.forEach(function (e, i) { %>
+      <li class="reveal" style="--i: <%= Math.min(i, 12) %>">
+        <% if (e.date) { %><time><%= date(e.date, 'YYYY-MM-DD') %></time><% } %>
+        <p><%= e.content %></p>
+      </li>
+    <% }) %>
+  </ul>
+</div>

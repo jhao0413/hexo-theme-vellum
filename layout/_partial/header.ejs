@@ -1,0 +1,31 @@
+<%
+  const brand = theme.brand || config.title;
+  const current = '/' + (page.path || '').replace(/index\.html$/, '');
+  const isActive = (href) => href === '/' ? current === '/' : current.startsWith(href.replace(/\/?$/, '/'));
+%>
+<header class="site-header">
+  <div class="progress" aria-hidden="true"></div>
+  <nav class="nav wrap" aria-label="Main">
+    <a class="brand" href="<%- url_for('/') %>">
+      <% if (theme.avatar) { %><img class="brand-avatar" src="<%- url_for(theme.avatar) %>" alt="" width="28" height="28"><% } %>
+      <span><%= brand %><span class="brand-dot">.</span></span>
+    </a>
+    <div class="nav-links" id="nav-links">
+      <% for (const name in theme.menu) { const href = theme.menu[name]; const external = /^https?:/.test(href); %>
+        <a href="<%- external ? href : url_for(href) %>"<% if (!external && isActive(href)) { %> aria-current="page"<% } %><% if (external) { %> target="_blank" rel="noopener"<% } %>><%= name %><% if (external) { %> <span aria-hidden="true">↗</span><% } %></a>
+      <% } %>
+    </div>
+    <div class="nav-actions">
+      <button class="icon-button search-trigger" type="button" aria-label="<%= __('search') %>" aria-keyshortcuts="Meta+K Control+K">
+        <%- jiu_icon('search') %><kbd class="kbd">⌘K</kbd>
+      </button>
+      <button class="icon-button theme-toggle" type="button" aria-label="<%= __('toggle_theme') %>">
+        <span class="when-light"><%- jiu_icon('moon') %></span>
+        <span class="when-dark"><%- jiu_icon('sun') %></span>
+      </button>
+      <button class="icon-button menu-toggle" type="button" aria-label="<%= __('menu') %>" aria-expanded="false" aria-controls="nav-links">
+        <%- jiu_icon('menu') %>
+      </button>
+    </div>
+  </nav>
+</header>

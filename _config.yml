@@ -1,0 +1,55 @@
+# Default settings for hexo-theme-jiu.
+# Override any of these in the site root `_config.jiu.yml`.
+
+avatar:
+favicon:
+
+# Brand shown in the header. Falls back to config.title.
+brand:
+
+menu:
+  Home: /
+  Archives: /archives/
+  Essays: /essays/
+  About: /about/
+
+home:
+  greeting: Hi, I'm
+  bio:
+  # Show the latest entry of source/_data/essays.yml as a quote under the bio.
+  quote_from_essays: true
+  # Number of posts listed under "Recent Writing".
+  recent: 8
+  # Number of essays shown on the home page.
+  essays: 3
+
+social:
+  # name: url  (supported icons: github, email, twitter, rss, link)
+  github:
+  email:
+
+post:
+  toc: true
+  # Show word count and reading time in the post meta row.
+  wordcount: true
+  copyright: true
+
+comment:
+  enable: false
+  gitalk:
+    clientID:
+    clientSecret:
+    repo:
+    owner:
+    proxy:
+
+# Busuanzi-compatible page view counter (vercount).
+counter:
+  enable: false
+  url: https://cn.vercount.one/js
+
+# Footer
+since: 2020
+
+# Raw HTML injected before </head>, e.g. analytics scripts.
+head_inject: []

@@ -1,0 +1,39 @@
+<%
+  let heading = __('archives');
+  let prefix = '';
+  if (is_tag()) { heading = page.tag; prefix = '#'; }
+  else if (is_category()) { heading = page.category; prefix = ''; }
+  const years = {};
+  page.posts.sort('date', -1).each(function (post) {
+    const y = post.date.year();
+    (years[y] = years[y] || []).push(post);
+  });
+  const order = Object.keys(years).sort((a, b) => b - a);
+%>
+<div class="wrap narrow">
+  <header class="page-header">
+    <% if (is_tag()) { %><p class="page-kicker"><%= __('tagged') %></p><% } else if (is_category()) { %><p class="page-kicker"><%= __('category') %></p><% } %>
+    <h1 class="page-title"><%= prefix %><%= heading %></h1>
+    <p class="page-sub"><%= page.posts.length %> <%= __('posts') %></p>
+  </header>
+
+  <% order.forEach(function (year) { %>
+    <section class="year">
+      <h2 class="year-title"><%= year %><sup><%= years[year].length %></sup></h2>
+      <ul class="archive-list">
+        <% years[year].forEach(function (post) { %>
+          <li>
+            <a href="<%- url_for(post.path) %>">
+              <time datetime="<%= date_xml(post.date) %>"><%= date(post.date, 'MM-DD') %></time>
+              <span><%= post.title %></span>
+            </a>
+          </li>
+        <% }) %>
+      </ul>
+    </section>
+  <% }) %>
+
+  <% if (page.total > 1) { %>
+    <nav class="pagination"><%- paginator({ prev_text: '←', next_text: '→' }) %></nav>
+  <% } %>
+</div>

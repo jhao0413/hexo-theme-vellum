@@ -1,0 +1,31 @@
+<% if (page.type === 'essays') { %>
+  <%- partial('_partial/essays') %>
+<% } else if (page.type === 'tags') { %>
+  <div class="wrap narrow">
+    <header class="page-header"><h1 class="page-title"><%= __('tags') %></h1><p class="page-sub"><%= site.tags.length %> <%= __('tags').toLowerCase() %></p></header>
+    <p class="tag-cloud">
+      <% site.tags.sort('length', -1).each(function (tag) { %>
+        <a class="chip" href="<%- url_for(tag.path) %>">#<%= tag.name %> <sup><%= tag.length %></sup></a>
+      <% }) %>
+    </p>
+  </div>
+<% } else if (page.type === 'categories') { %>
+  <div class="wrap narrow">
+    <header class="page-header"><h1 class="page-title"><%= __('categories') %></h1></header>
+    <ul class="category-list">
+      <% site.categories.sort('length', -1).each(function (cat) { %>
+        <li><a href="<%- url_for(cat.path) %>"><span><%= cat.name %></span><span class="muted"><%= cat.length %></span></a></li>
+      <% }) %>
+    </ul>
+  </div>
+<% } else { %>
+  <article class="article wrap narrow">
+    <header class="article-header">
+      <h1 class="article-title"><%= page.title %></h1>
+    </header>
+    <div class="prose">
+      <%- page.content %>
+    </div>
+    <%- partial('_partial/comments') %>
+  </article>
+<% } %>

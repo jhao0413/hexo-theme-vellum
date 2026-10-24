@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="<%= page.lang || config.language || 'zh-CN' %>">
+<%- partial('_partial/head') %>
+<body class="<%= is_home() ? 'is-home' : is_post() ? 'is-post' : 'is-page' %>">
+  <a class="skip-link" href="#main"><%= __('skip') %></a>
+  <%- partial('_partial/header') %>
+  <main id="main" class="main">
+    <%- body %>
+  </main>
+  <%- partial('_partial/footer') %>
+  <%- partial('_partial/search') %>
+  <script src="<%- url_for('/js/main.js') %>" defer></script>
+</body>
+</html>

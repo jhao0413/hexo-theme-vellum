@@ -1,0 +1,55 @@
+<%
+  const tocHtml = theme.post.toc && page.toc !== false ? toc(page.content, { list_number: false, max_depth: 4 }) : '';
+%>
+<div class="post-layout<%= tocHtml ? ' has-toc' : '' %>">
+  <% if (tocHtml) { %>
+    <aside class="post-toc" aria-label="<%= __('contents') %>">
+      <p class="post-toc-title"><%= __('contents') %></p>
+      <%- tocHtml %>
+    </aside>
+  <% } %>
+
+  <article class="article wrap narrow">
+    <header class="article-header">
+      <h1 class="article-title"><%= page.title %></h1>
+      <p class="article-meta">
+        <time datetime="<%= date_xml(page.date) %>"><%= date(page.date, 'YYYY-MM-DD') %></time>
+        <% if (page.categories && page.categories.length) { %>
+          <a href="<%- url_for(page.categories.data[0].path) %>"><%= page.categories.data[0].name %></a>
+        <% } %>
+        <% if (theme.post.wordcount) { %>
+          <span><%= jiu_wordcount(page.content) %> <%= __('words_count') %></span>
+          <span><%= jiu_readtime(page.content) %> <%= __('min_read') %></span>
+        <% } %>
+        <% if (theme.counter && theme.counter.enable) { %>
+          <span><span id="vercount_value_page_pv">–</span> <%= __('views') %></span>
+        <% } %>
+      </p>
+    </header>
+
+    <div class="prose">
+      <%- page.content %>
+    </div>
+
+    <footer class="article-footer">
+      <% if (page.tags && page.tags.length) { %>
+        <p class="tag-row">
+          <% page.tags.each(function (tag) { %><a class="chip" href="<%- url_for(tag.path) %>">#<%= tag.name %></a><% }) %>
+        </p>
+      <% } %>
+      <% if (theme.post.copyright) { %>
+        <p class="copyright"><%= __('copyright') %></p>
+      <% } %>
+      <nav class="post-nav" aria-label="Post navigation">
+        <% if (page.next) { %>
+          <a class="post-nav-prev" href="<%- url_for(page.next.path) %>"><small>← <%= __('prev_post') %></small><span><%= page.next.title %></span></a>
+        <% } else { %><span></span><% } %>
+        <% if (page.prev) { %>
+          <a class="post-nav-next" href="<%- url_for(page.prev.path) %>"><small><%= __('next_post') %> →</small><span><%= page.prev.title %></span></a>
+        <% } %>
+      </nav>
+    </footer>
+
+    <%- partial('_partial/comments') %>
+  </article>
+</div>

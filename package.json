@@ -1,0 +1,23 @@
+{
+  "name": "hexo-theme-jiu",
+  "version": "0.1.0",
+  "description": "A quiet, typographic Hexo theme with a warm paper palette, side TOC, essays timeline and ⌘K search.",
+  "keywords": [
+    "hexo",
+    "theme",
+    "hexo-theme",
+    "blog"
+  ],
+  "author": "jhao0413",
+  "license": "MIT",
+  "files": [
+    "_config.yml",
+    "languages",
+    "layout",
+    "scripts",
+    "source"
+  ],
+  "peerDependencies": {
+    "hexo": ">=7.0.0"
+  }
+}

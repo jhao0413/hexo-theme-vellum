@@ -1,0 +1,69 @@
+<%
+  const posts = site.posts.sort('date', -1);
+  const recent = posts.limit(theme.home.recent || 8);
+  const essays = jiu_essays();
+  const first = posts.length ? posts.data[posts.length - 1].date : null;
+  const days = first ? Math.max(1, Math.round((Date.now() - first.valueOf()) / 86400000)) : 0;
+%>
+<div class="wrap narrow">
+  <section class="hero reveal">
+    <% if (theme.avatar) { %>
+      <img class="hero-avatar" src="<%- url_for(theme.avatar) %>" alt="<%= config.author %>" width="72" height="72">
+    <% } %>
+    <h1 class="hero-title"><%= theme.home.greeting %> <span class="accent"><%= config.author %></span> <span class="wave" aria-hidden="true">👋</span></h1>
+    <% if (theme.home.bio) { %><p class="hero-bio"><%= theme.home.bio %></p><% } %>
+    <% if (theme.home.quote_from_essays && essays.length) { %>
+      <blockquote class="hero-quote">
+        <p>「 <%= essays[0].content %> 」</p>
+      </blockquote>
+    <% } %>
+    <p class="hero-stats">
+      <span><b><%= posts.length %></b> <%= __('posts') %></span>
+      <span aria-hidden="true">·</span>
+      <span><b><%= jiu_format_k(jiu_total_words()) %></b> <%= __('words') %></span>
+      <span aria-hidden="true">·</span>
+      <span><b><%= days %></b> <%= __('days') %></span>
+    </p>
+    <% if (Object.values(theme.social || {}).some(Boolean)) { %>
+      <p class="hero-social">
+        <% for (const name in theme.social) { const url = theme.social[name]; if (!url) continue; %>
+          <a class="chip" href="<%- name === 'email' ? 'mailto:' + url : url %>" <% if (name !== 'email') { %>target="_blank" rel="noopener"<% } %>><%- jiu_icon(name) %><span><%= name[0].toUpperCase() + name.slice(1) %></span></a>
+        <% } %>
+      </p>
+    <% } %>
+  </section>
+
+  <section class="section">
+    <h2 class="section-title reveal"><%= __('recent_writing') %></h2>
+    <ol class="post-index">
+      <% recent.each(function (post, i) { %>
+        <li class="reveal" style="--i: <%= i %>">
+          <a href="<%- url_for(post.path) %>">
+            <span class="post-index-num"><%= jiu_pad(i + 1) %></span>
+            <span class="post-index-title"><%= post.title %></span>
+            <span class="post-index-meta">
+              <% if (post.categories.length) { %><span><%= post.categories.data[0].name %></span><% } %>
+              <time datetime="<%= date_xml(post.date) %>"><%= date(post.date, 'YYYY-MM-DD') %></time>
+            </span>
+          </a>
+        </li>
+      <% }) %>
+    </ol>
+    <a class="more-link" href="<%- url_for(config.archive_dir + '/') %>"><%= __('all_posts') %> <%- jiu_icon('arrow') %></a>
+  </section>
+
+  <% if (essays.length && theme.home.essays) { %>
+    <section class="section">
+      <h2 class="section-title reveal"><%= __('recent_essays') %></h2>
+      <ul class="essay-list compact">
+        <% essays.slice(0, theme.home.essays).forEach(function (e, i) { %>
+          <li class="reveal" style="--i: <%= i %>">
+            <% if (e.date) { %><time><%= date(e.date, 'YYYY-MM-DD') %></time><% } %>
+            <p><%= e.content %></p>
+          </li>
+        <% }) %>
+      </ul>
+      <a class="more-link" href="<%- url_for('/essays/') %>"><%= __('all_essays') %> <%- jiu_icon('arrow') %></a>
+    </section>
+  <% } %>
+</div>

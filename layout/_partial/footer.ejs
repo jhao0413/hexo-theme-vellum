@@ -1,0 +1,17 @@
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <p>© <%= theme.since && theme.since < new Date().getFullYear() ? `${theme.since}–` : '' %><%= new Date().getFullYear() %> <%= config.author || config.title %></p>
+    <p class="footer-links">
+      <% for (const name in theme.social) { const url = theme.social[name]; if (!url) continue; %>
+        <a href="<%- name === 'email' ? 'mailto:' + url : url %>" aria-label="<%= name %>" <% if (name !== 'email') { %>target="_blank" rel="noopener"<% } %>><%- jiu_icon(name) %></a>
+      <% } %>
+      <% if (theme.counter && theme.counter.enable) { %>
+        <span class="muted"><span id="vercount_value_site_pv">–</span> <%= __('views') %></span>
+      <% } %>
+      <span class="muted">Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a></span>
+    </p>
+  </div>
+  <% if (theme.counter && theme.counter.enable) { %>
+    <script defer src="<%- theme.counter.url %>"></script>
+  <% } %>
+</footer>

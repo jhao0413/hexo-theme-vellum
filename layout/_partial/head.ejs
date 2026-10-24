@@ -1,0 +1,26 @@
+<%
+  let title = config.title;
+  if (is_post() || (page.title && !is_home())) title = `${page.title} · ${config.title}`;
+  else if (is_archive()) title = `${__('archives')} · ${config.title}`;
+  else if (is_tag()) title = `#${page.tag} · ${config.title}`;
+  else if (is_category()) title = `${page.category} · ${config.title}`;
+%>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%= title %></title>
+  <meta name="theme-color" content="#fafaf8" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#171915" media="(prefers-color-scheme: dark)">
+  <%- open_graph({ twitter_card: 'summary', image: page.cover || page.thumbnail }) %>
+  <% if (theme.favicon) { %><link rel="icon" href="<%- url_for(theme.favicon) %>"><% } %>
+  <link rel="canonical" href="<%- full_url_for(page.path).replace(/index\.html$/, '') %>">
+  <script>
+    try {
+      var t = localStorage.getItem('jiu-theme');
+      if (t === 'dark' || t === 'light') document.documentElement.dataset.theme = t;
+    } catch (e) {}
+  </script>
+  <link rel="stylesheet" href="<%- url_for('/css/style.css') %>">
+  <% (theme.head_inject || []).forEach(function (html) { %><%- html %>
+  <% }) %>
+</head>
