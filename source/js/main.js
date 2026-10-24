@@ -55,6 +55,14 @@
   }, { passive: true });
   onScroll();
 
+  /* Home: show the header avatar once the hero avatar scrolls out of view */
+  const heroAvatar = $('.hero-avatar');
+  if (heroAvatar) {
+    new IntersectionObserver(([entry]) => {
+      header.classList.toggle('show-avatar', !entry.isIntersecting);
+    }, { rootMargin: '-64px 0px 0px 0px' }).observe(heroAvatar);
+  }
+
   /* TOC active heading ------------------------------------------------------ */
   const tocLinks = $$('.post-toc a');
   if (tocLinks.length) {
