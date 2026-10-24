@@ -55,18 +55,6 @@
   }, { passive: true });
   onScroll();
 
-  /* Home: pixel XP bar shows how far through the year we are (refreshed client-side) */
-  const xp = $('.xp-bar');
-  if (xp) {
-    const now = new Date();
-    const start = new Date(now.getFullYear(), 0, 1);
-    const pct = Math.floor((now - start) / (new Date(now.getFullYear() + 1, 0, 1) - start) * 100);
-    $('[data-xp-year]', xp).textContent = now.getFullYear();
-    $('[data-xp-pct]', xp).textContent = pct;
-    xp.setAttribute('aria-label', `${now.getFullYear()}: ${pct}%`);
-    $$('.xp-track i', xp).forEach((cell, k) => cell.classList.toggle('on', k < Math.round(pct / 5)));
-  }
-
   /* Home: show the header avatar once the hero avatar scrolls out of view */
   const heroAvatar = $('.hero-avatar');
   if (heroAvatar) {

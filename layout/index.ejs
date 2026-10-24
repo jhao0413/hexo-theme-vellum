@@ -4,7 +4,7 @@
   const essays = vellum_essays();
   const first = posts.length ? posts.data[posts.length - 1].date : null;
   const days = first ? Math.max(1, Math.round((Date.now() - first.valueOf()) / 86400000)) : 0;
-  const decor = ['print', 'pixel'].includes(theme.home.decor) ? theme.home.decor : null;
+  const decor = theme.home.decor === 'print' ? theme.home.decor : null;
 %>
 <section class="hero<%= decor ? ' hero-' + decor : '' %>">
   <% if (decor) { %><%- partial('_partial/decor-' + decor, { postCount: posts.length }) %><% } %>
@@ -14,11 +14,6 @@
     <% if (theme.avatar) { %>
       <div class="hero-avatar reveal">
         <img src="<%- url_for(theme.avatar) %>" alt="<%= config.author %>" width="96" height="96">
-        <% if (decor === 'pixel') { %>
-          <svg class="pixel-cursor" viewBox="0 0 34 34" aria-hidden="true" shape-rendering="crispEdges">
-            <path d="M0 0h6v2H2v4H0zM28 0h6v6h-2V2h-4zM0 28h2v4h4v2H0zM32 28h2v6h-6v-2h4z"/>
-          </svg>
-        <% } %>
       </div>
     <% } %>
     <h1 class="hero-title reveal" style="--i: 1"><%= theme.home.greeting %> <span class="accent"><%= config.author %></span></h1>
@@ -35,17 +30,6 @@
       <span aria-hidden="true">·</span>
       <span><b><%= days %></b> <%= __('days') %></span>
     </p>
-    <% if (decor === 'pixel') {
-      const now = new Date();
-      const start = new Date(now.getFullYear(), 0, 1);
-      const pct = Math.floor((now - start) / (new Date(now.getFullYear() + 1, 0, 1) - start) * 100);
-    %>
-      <p class="xp-bar reveal" style="--i: 4" aria-label="<%= now.getFullYear() %>: <%= pct %>%">
-        <span class="xp-label">LV.<span data-xp-year><%= now.getFullYear() %></span></span>
-        <span class="xp-track" aria-hidden="true"><% for (let k = 0; k < 20; k++) { %><i<%= k < Math.round(pct / 5) ? ' class="on"' : '' %>></i><% } %></span>
-        <span class="xp-label"><span data-xp-pct><%= pct %></span>%</span>
-      </p>
-    <% } %>
     <% if (Object.values(theme.social || {}).some(Boolean)) { %>
       <p class="hero-social reveal" style="--i: 5">
         <% for (const name in theme.social) { const url = theme.social[name]; if (!url) continue; %>
