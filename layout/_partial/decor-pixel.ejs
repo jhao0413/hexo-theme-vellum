@@ -1,0 +1,23 @@
+<%# Pixel decor: still, 8-bit scenery behind the hero. Sprites live in scripts/sprites.js. %>
+<div class="hero-decor decor-pixel-bg" aria-hidden="true">
+  <%- vellum_pixel('cloud', 'px-cloud px-cloud-1') %>
+  <%- vellum_pixel('cloud', 'px-cloud px-cloud-2') %>
+  <%- vellum_pixel('coin', 'px-coin') %>
+  <%- vellum_pixel('block', 'px-block-1') %>
+  <%- vellum_pixel('used', 'px-block-2') %>
+  <%- vellum_pixel('block', 'px-block-3') %>
+  <%- vellum_pixel('hero', 'px-hero') %>
+  <%- vellum_pixel('enemy', 'px-enemy') %>
+  <svg class="px-ground" width="100%" height="24" aria-hidden="true">
+    <defs>
+      <pattern id="px-brick" width="48" height="24" patternUnits="userSpaceOnUse">
+        <rect class="px-brick" width="48" height="24"/>
+        <rect class="px-mortar" width="48" height="3"/>
+        <rect class="px-mortar" y="12" width="48" height="3"/>
+        <rect class="px-mortar" width="3" height="12"/>
+        <rect class="px-mortar" x="24" y="12" width="3" height="12"/>
+      </pattern>
+    </defs>
+    <rect width="100%" height="24" fill="url(#px-brick)"/>
+  </svg>
+</div>

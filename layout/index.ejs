@@ -4,7 +4,7 @@
   const essays = vellum_essays();
   const first = posts.length ? posts.data[posts.length - 1].date : null;
   const days = first ? Math.max(1, Math.round((Date.now() - first.valueOf()) / 86400000)) : 0;
-  const decor = theme.home.decor === 'print' ? theme.home.decor : null;
+  const decor = ['print', 'pixel'].includes(theme.home.decor) ? theme.home.decor : null;
 %>
 <section class="hero<%= decor ? ' hero-' + decor : '' %>">
   <% if (decor) { %><%- partial('_partial/decor-' + decor, { postCount: posts.length }) %><% } %>

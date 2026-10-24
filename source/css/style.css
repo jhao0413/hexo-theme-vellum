@@ -33,6 +33,25 @@
   --tok-comment: #9a9c93;
   --tok-title: #2f6b9a;
   --tok-attr: #a0522d;
+
+  /* Pixel decor palette */
+  --px-ink: #2b2a26;
+  --px-skin: #f0c9a2;
+  --px-shine: #fff4e2;
+  --px-shade: #d9a982;
+  --px-suit: #e0b042;
+  --px-red: #c4493b;
+  --px-cape: #fbf8ef;
+  --px-cape-edge: #c9c2b0;
+  --px-enemy: #a85b40;
+  --px-feet: #d9b68c;
+  --px-block: #d9a441;
+  --px-used: #a58e70;
+  --px-coin: #e3b546;
+  --px-cloud: #fdfcf8;
+  --px-cloud-edge: #ddd6c6;
+  --px-brick: #d8c3a2;
+  --px-mortar: #b39b78;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -57,6 +76,17 @@
     --tok-comment: #767c6d;
     --tok-title: #8cbde6;
     --tok-attr: #e0a37d;
+    --px-ink: #121310;
+    --px-cape: #e8e3d4;
+  --px-cape-edge: #9d978a;
+    --px-cape-edge: #9d978a;
+    --px-cloud: #2a2c25;
+    --px-cloud-edge: #3c3f35;
+    --px-cloud: #2a2c25;
+  --px-cloud-edge: #3c3f35;
+  --px-brick: #3a3a2e;
+    --px-mortar: #2a2a21;
+    --px-used: #6f6452;
   }
 }
 
@@ -81,6 +111,11 @@
   --tok-comment: #767c6d;
   --tok-title: #8cbde6;
   --tok-attr: #e0a37d;
+  --px-ink: #121310;
+  --px-cape: #e8e3d4;
+  --px-brick: #3a3a2e;
+  --px-mortar: #2a2a21;
+  --px-used: #6f6452;
 }
 
 /* Base ------------------------------------------------------------------- */
@@ -501,6 +536,7 @@ p { text-wrap: pretty; }
   color: var(--faint);
 }
 .hero-print { padding-bottom: 88px; }
+.hero-pixel { padding-bottom: 24px; }
 .decor-print { padding-block: 8px; }
 .crop { position: absolute; width: 18px; height: 18px; pointer-events: none; }
 .crop::before, .crop::after { content: ""; position: absolute; background: var(--faint); opacity: .8; }
@@ -914,3 +950,41 @@ p { text-wrap: pretty; }
 .gt-container .gt-btn { border-color: var(--accent) !important; background: var(--accent) !important; }
 .gt-container a, .gt-container .gt-link { color: var(--accent) !important; }
 .gt-container .gt-header-textarea { background: var(--soft) !important; color: var(--ink) !important; }
+
+/* Decor: pixel — still 8-bit scenery behind the hero */
+.hero-pixel { padding-bottom: 112px; }
+.decor-pixel-bg .px { position: absolute; }
+.px-k, .px-b { fill: var(--px-ink); }
+.px-s { fill: var(--px-skin); }
+.px-h { fill: var(--px-shine); }
+.px-o { fill: var(--px-shade); }
+.px-y { fill: var(--px-suit); }
+.px-r { fill: var(--px-red); }
+.px-w, .px-e { fill: var(--px-cape); }
+.px-g { fill: var(--px-cape-edge); }
+.px-m { fill: var(--px-enemy); }
+.px-f { fill: var(--px-feet); }
+.px-q { fill: var(--px-block); }
+.px-u { fill: var(--px-used); }
+.px-c { fill: var(--px-coin); }
+.px-l { fill: var(--px-cloud); }
+.px-d { fill: var(--px-cloud-edge); }
+.px-brick { fill: var(--px-brick); }
+.px-mortar { fill: var(--px-mortar); }
+
+.px-ground { position: absolute; left: 0; bottom: 0; display: block; }
+.px-hero { left: max(24px, calc(50% - 440px)); bottom: 24px; }
+.px-enemy { right: max(24px, calc(50% - 420px)); bottom: 24px; }
+.px-block-1 { left: max(96px, calc(50% - 330px)); bottom: 150px; }
+.px-block-2 { right: max(72px, calc(50% - 360px)); bottom: 168px; }
+.px-block-3 { right: max(42px, calc(50% - 390px)); bottom: 168px; }
+.px-coin { left: calc(max(96px, calc(50% - 330px)) + 6px); bottom: 186px; }
+.px-cloud-1 { left: max(24px, calc(50% - 520px)); top: 64px; }
+.px-cloud-2 { right: max(24px, calc(50% - 500px)); top: 112px; transform: scale(.75); transform-origin: right; }
+@media (max-width: 720px) {
+  .hero-pixel { padding-bottom: 104px; }
+  .px-hero { left: 16px; }
+  .px-enemy { right: 16px; }
+  .px-block-1, .px-block-2, .px-block-3, .px-coin, .px-cloud-2 { display: none; }
+  .px-cloud-1 { left: auto; right: 16px; top: 72px; }
+}

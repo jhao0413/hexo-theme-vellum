@@ -41,6 +41,26 @@ hexo.extend.helper.register('vellum_essays', function () {
     .sort((a, b) => (b.date || 0) - (a.date || 0));
 });
 
+// Renders a sprite from scripts/sprites.js as a crisp inline SVG, one <rect> per run of same-colored pixels.
+// Colors come from CSS classes (.px-k, .px-s, …) so the sprite follows light and dark mode.
+const sprites = require('./sprites');
+hexo.extend.helper.register('vellum_pixel', function (name, className) {
+  const rows = sprites[name];
+  if (!rows) return '';
+  const w = Math.max(...rows.map((r) => r.length));
+  let rects = '';
+  rows.forEach((row, y) => {
+    for (let x = 0; x < row.length;) {
+      const c = row[x];
+      let n = 1;
+      while (row[x + n] === c) n++;
+      if (c !== '.') rects += `<rect class="px-${c}" x="${x}" y="${y}" width="${n}" height="1"/>`;
+      x += n;
+    }
+  });
+  return `<svg class="px ${className || ''}" viewBox="0 0 ${w} ${rows.length}" width="${w * 3}" height="${rows.length * 3}" shape-rendering="crispEdges" aria-hidden="true">${rects}</svg>`;
+});
+
 hexo.extend.helper.register('vellum_icon', function (name) {
   const paths = {
     github: '<path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/>',
