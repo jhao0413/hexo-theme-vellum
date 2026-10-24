@@ -5,26 +5,23 @@
   const first = posts.length ? posts.data[posts.length - 1].date : null;
   const days = first ? Math.max(1, Math.round((Date.now() - first.valueOf()) / 86400000)) : 0;
 %>
-<%
-  // Decorative petals around the hero: [left %, top %, size px, tone, delay s, duration s]
-  const petals = [
-    [7, 20, 22, 'a', 0, 14], [15, 66, 15, 'b', 3, 18], [26, 34, 12, 'c', 6, 16],
-    [72, 16, 16, 'b', 4, 17], [80, 60, 22, 'c', 1, 15], [90, 30, 14, 'a', 5, 19],
-    [36, 84, 13, 'a', 2, 20], [62, 86, 15, 'b', 7, 16]
-  ];
-%>
 <section class="hero">
-  <div class="hero-decor" aria-hidden="true">
-    <svg width="0" height="0" style="position:absolute">
-      <symbol id="petal" viewBox="-12 -12 24 24">
-        <g><% for (let k = 0; k < 5; k++) { %><ellipse cx="0" cy="-5.6" rx="4.4" ry="5.8" transform="rotate(<%= k * 72 %>)"/><% } %></g>
-        <circle r="1.8" class="petal-core"/>
-      </symbol>
-    </svg>
-    <% petals.forEach(function (p, i) { %>
-      <svg class="petal petal-<%= p[3] %><%= i % 3 === 2 ? ' petal-wide' : '' %>" style="left: <%= p[0] %>%; top: <%= p[1] %>%; width: <%= p[2] %>px; height: <%= p[2] %>px; --delay: -<%= p[4] %>s; --dur: <%= p[5] %>s"><use href="#petal"/></svg>
-    <% }) %>
-  </div>
+  <svg class="hero-decor" viewBox="0 0 1200 520" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <g class="contours">
+      <% vellum_contours([[150, 110, 34, 7, 1], [1080, 440, 30, 8, 2], [620, 600, 40, 5, 3]]).forEach(function (d) { %>
+        <path d="<%= d %>"/>
+      <% }) %>
+    </g>
+    <path id="route" class="route" d="M -20 470 C 110 460 150 340 230 260 S 360 70 520 46 S 770 30 880 92 S 1000 300 1080 330 S 1180 300 1230 250"/>
+    <g class="route-marks">
+      <circle cx="230" cy="260" r="3.5"/><text x="244" y="264">5K</text>
+      <circle cx="880" cy="92" r="3.5"/><text x="894" y="96">21.1K</text>
+      <circle cx="1080" cy="330" r="3.5"/><text x="1060" y="358" text-anchor="end">42.195K</text>
+    </g>
+    <circle class="runner" r="4.5">
+      <animateMotion dur="28s" repeatCount="indefinite" rotate="auto"><mpath href="#route"/></animateMotion>
+    </circle>
+  </svg>
 
   <div class="wrap narrow hero-inner">
     <% if (theme.avatar) { %>

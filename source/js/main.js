@@ -55,6 +55,10 @@
   }, { passive: true });
   onScroll();
 
+  /* Home: keep the runner still for reduced motion */
+  const decor = $('.hero-decor');
+  if (decor && matchMedia('(prefers-reduced-motion: reduce)').matches) decor.pauseAnimations();
+
   /* Home: show the header avatar once the hero avatar scrolls out of view */
   const heroAvatar = $('.hero-avatar');
   if (heroAvatar) {

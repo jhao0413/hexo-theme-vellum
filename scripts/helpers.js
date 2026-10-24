@@ -41,6 +41,28 @@ hexo.extend.helper.register('vellum_essays', function () {
     .sort((a, b) => (b.date || 0) - (a.date || 0));
 });
 
+// Closed, gently irregular rings for the hero's contour-map decoration.
+// Each hill is [cx, cy, ring spacing, ring count, seed]; returns SVG path data, one per ring.
+hexo.extend.helper.register('vellum_contours', function (hills) {
+  const paths = [];
+  for (const [cx, cy, step, rings, seed] of hills) {
+    for (let i = 1; i <= rings; i++) {
+      const r = step * i;
+      const pts = [];
+      for (let k = 0; k < 72; k++) {
+        const t = (k / 72) * Math.PI * 2;
+        const wobble = 1
+          + 0.09 * Math.sin(3 * t + seed + i * 0.35)
+          + 0.05 * Math.sin(5 * t + seed * 2 - i * 0.2)
+          + 0.03 * Math.sin(9 * t + seed * 3);
+        pts.push([cx + Math.cos(t) * r * wobble * 1.25, cy + Math.sin(t) * r * wobble]);
+      }
+      paths.push('M' + pts.map((p) => p.map((v) => v.toFixed(1)).join(' ')).join('L') + 'Z');
+    }
+  }
+  return paths;
+});
+
 hexo.extend.helper.register('vellum_icon', function (name) {
   const paths = {
     github: '<path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/>',
