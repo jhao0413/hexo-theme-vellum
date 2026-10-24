@@ -367,16 +367,7 @@ p { text-wrap: pretty; }
 
 /* Hero ------------------------------------------------------------------- */
 
-.hero { padding-top: 24px; }
-.hero-avatar {
-  width: 72px;
-  height: 72px;
-  border-radius: 50%;
-  margin-bottom: 24px;
-  outline: 1px solid color-mix(in srgb, var(--ink) 10%, transparent);
-  outline-offset: -1px;
-  box-shadow: var(--shadow);
-}
+.hero { padding-top: 40px; }
 .hero-title {
   margin: 0;
   font-family: var(--serif);
@@ -385,15 +376,6 @@ p { text-wrap: pretty; }
   line-height: 1.25;
   letter-spacing: -0.02em;
 }
-.wave { display: inline-block; transform-origin: 70% 70%; animation: wave 2.4s ease-in-out 1s 2; }
-@keyframes wave {
-  0%, 60%, 100% { transform: rotate(0); }
-  10%, 30% { transform: rotate(14deg); }
-  20% { transform: rotate(-8deg); }
-  40% { transform: rotate(-4deg); }
-  50% { transform: rotate(10deg); }
-}
-@media (prefers-reduced-motion: reduce) { .wave { animation: none; } }
 
 .hero-bio { margin: 16px 0 0; font-size: 17px; color: var(--ink-2); }
 .hero-quote {

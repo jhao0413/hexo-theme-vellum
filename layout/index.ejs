@@ -7,10 +7,7 @@
 %>
 <div class="wrap narrow">
   <section class="hero reveal">
-    <% if (theme.avatar) { %>
-      <img class="hero-avatar" src="<%- url_for(theme.avatar) %>" alt="<%= config.author %>" width="72" height="72">
-    <% } %>
-    <h1 class="hero-title"><%= theme.home.greeting %> <span class="accent"><%= config.author %></span> <span class="wave" aria-hidden="true">👋</span></h1>
+    <h1 class="hero-title"><%= theme.home.greeting %> <span class="accent"><%= config.author %></span></h1>
     <% if (theme.home.bio) { %><p class="hero-bio"><%= theme.home.bio %></p><% } %>
     <% if (theme.home.quote_from_essays && essays.length) { %>
       <blockquote class="hero-quote">
