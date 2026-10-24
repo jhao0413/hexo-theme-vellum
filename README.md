@@ -1,4 +1,4 @@
-# hexo-theme-jiu
+# hexo-theme-vellum
 
 A quiet, typographic Hexo theme: warm paper palette, serif display type, a numbered "Recent Writing" index, a side table of contents on articles, an essays timeline and ⌘K search. Light and dark modes follow the system and can be toggled.
 
@@ -7,13 +7,13 @@ A quiet, typographic Hexo theme: warm paper palette, serif display type, a numbe
 Clone into your blog's `themes/` folder (or symlink a local checkout there):
 
 ```sh
-git clone https://github.com/jhao0413/hexo-theme-jiu themes/jiu
+git clone https://github.com/jhao0413/hexo-theme-vellum themes/vellum
 ```
 
 Then set the theme in the site `_config.yml`:
 
 ```yaml
-theme: jiu
+theme: vellum
 
 # Recommended: the home page and archives show full lists
 index_generator:
@@ -33,7 +33,7 @@ search:
 
 ## Configure
 
-Override any key from the theme's [`_config.yml`](./_config.yml) in a `_config.jiu.yml` file at the site root.
+Override any key from the theme's [`_config.yml`](./_config.yml) in a `_config.vellum.yml` file at the site root.
 
 ## Pages
 

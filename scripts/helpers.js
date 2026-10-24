@@ -12,28 +12,28 @@ function countWords(html) {
   return cjk + latin;
 }
 
-hexo.extend.helper.register('jiu_wordcount', function (content) {
+hexo.extend.helper.register('vellum_wordcount', function (content) {
   return countWords(content);
 });
 
 // ~400 CJK characters or ~200 English words per minute, blended.
-hexo.extend.helper.register('jiu_readtime', function (content) {
+hexo.extend.helper.register('vellum_readtime', function (content) {
   return Math.max(1, Math.round(countWords(content) / 350));
 });
 
-hexo.extend.helper.register('jiu_total_words', function () {
+hexo.extend.helper.register('vellum_total_words', function () {
   return this.site.posts.reduce((sum, post) => sum + countWords(post.content), 0);
 });
 
-hexo.extend.helper.register('jiu_format_k', function (n) {
+hexo.extend.helper.register('vellum_format_k', function (n) {
   return n >= 1000 ? `${(n / 1000).toFixed(1).replace(/\.0$/, '')}k` : String(n);
 });
 
-hexo.extend.helper.register('jiu_pad', function (n) {
+hexo.extend.helper.register('vellum_pad', function (n) {
   return String(n).padStart(2, '0');
 });
 
-hexo.extend.helper.register('jiu_essays', function () {
+hexo.extend.helper.register('vellum_essays', function () {
   const essays = (this.site.data && this.site.data.essays) || [];
   return essays
     .filter((e) => e && e.content)
@@ -41,7 +41,7 @@ hexo.extend.helper.register('jiu_essays', function () {
     .sort((a, b) => (b.date || 0) - (a.date || 0));
 });
 
-hexo.extend.helper.register('jiu_icon', function (name) {
+hexo.extend.helper.register('vellum_icon', function (name) {
   const paths = {
     github: '<path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/>',
     email: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>',
@@ -60,7 +60,6 @@ hexo.extend.helper.register('jiu_icon', function (name) {
 
 // Lazy-load images and make wide tables scroll inside the article.
 hexo.extend.filter.register('after_post_render', function (data) {
-  if (hexo.config.theme !== 'jiu') return data;
   data.content = data.content
     .replace(/<img(?![^>]*\sloading=)/g, '<img loading="lazy" decoding="async"')
     // Code blocks render as <table><tr><td class="gutter">; leave those alone.

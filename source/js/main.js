@@ -10,7 +10,7 @@
     const next = currentTheme() === 'dark' ? 'light' : 'dark';
     const apply = () => {
       root.dataset.theme = next;
-      try { localStorage.setItem('jiu-theme', next); } catch (e) {}
+      try { localStorage.setItem('vellum-theme', next); } catch (e) {}
     };
     if (document.startViewTransition && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
       document.startViewTransition(apply);

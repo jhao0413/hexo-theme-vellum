@@ -18,8 +18,8 @@
           <a href="<%- url_for(page.categories.data[0].path) %>"><%= page.categories.data[0].name %></a>
         <% } %>
         <% if (theme.post.wordcount) { %>
-          <span><%= jiu_wordcount(page.content) %> <%= __('words_count') %></span>
-          <span><%= jiu_readtime(page.content) %> <%= __('min_read') %></span>
+          <span><%= vellum_wordcount(page.content) %> <%= __('words_count') %></span>
+          <span><%= vellum_readtime(page.content) %> <%= __('min_read') %></span>
         <% } %>
         <% if (theme.counter && theme.counter.enable) { %>
           <span><span id="vercount_value_page_pv">–</span> <%= __('views') %></span>
