@@ -22,7 +22,7 @@ home:
   recent: 8
   # Number of essays shown on the home page.
   essays: 3
-  # Hero decoration: print (proof-sheet marks), pixel (still 8-bit scenery) or none.
+  # Hero decoration: print (proof-sheet marks), pixel (dot grid with a duotone pixel figure) or none.
   decor: print
 
 social:
