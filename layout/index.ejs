@@ -4,29 +4,21 @@
   const essays = vellum_essays();
   const first = posts.length ? posts.data[posts.length - 1].date : null;
   const days = first ? Math.max(1, Math.round((Date.now() - first.valueOf()) / 86400000)) : 0;
+  const decor = ['print', 'pixel'].includes(theme.home.decor) ? theme.home.decor : null;
 %>
-<section class="hero">
-  <svg class="hero-decor" viewBox="0 0 1200 520" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-    <g class="contours">
-      <% vellum_contours([[150, 110, 34, 7, 1], [1080, 440, 30, 8, 2], [620, 600, 40, 5, 3]]).forEach(function (d) { %>
-        <path d="<%= d %>"/>
-      <% }) %>
-    </g>
-    <path id="route" class="route" d="M -20 470 C 110 460 150 340 230 260 S 360 70 520 46 S 770 30 880 92 S 1000 300 1080 330 S 1180 300 1230 250"/>
-    <g class="route-marks">
-      <circle cx="230" cy="260" r="3.5"/><text x="244" y="264">5K</text>
-      <circle cx="880" cy="92" r="3.5"/><text x="894" y="96">21.1K</text>
-      <circle cx="1080" cy="330" r="3.5"/><text x="1060" y="358" text-anchor="end">42.195K</text>
-    </g>
-    <circle class="runner" r="4.5">
-      <animateMotion dur="28s" repeatCount="indefinite" rotate="auto"><mpath href="#route"/></animateMotion>
-    </circle>
-  </svg>
+<section class="hero<%= decor ? ' hero-' + decor : '' %>">
+  <% if (decor) { %><%- partial('_partial/decor-' + decor, { postCount: posts.length }) %><% } %>
 
-  <div class="wrap narrow hero-inner">
+  <div class="wrap narrow hero-inner<%= decor ? ' decor-' + decor : '' %>">
+    <% if (decor === 'print') { %><span class="crop crop-tl" aria-hidden="true"></span><span class="crop crop-tr" aria-hidden="true"></span><span class="crop crop-bl" aria-hidden="true"></span><span class="crop crop-br" aria-hidden="true"></span><% } %>
     <% if (theme.avatar) { %>
       <div class="hero-avatar reveal">
         <img src="<%- url_for(theme.avatar) %>" alt="<%= config.author %>" width="96" height="96">
+        <% if (decor === 'pixel') { %>
+          <svg class="pixel-cursor" viewBox="0 0 34 34" aria-hidden="true" shape-rendering="crispEdges">
+            <path d="M0 0h6v2H2v4H0zM28 0h6v6h-2V2h-4zM0 28h2v4h4v2H0zM32 28h2v6h-6v-2h4z"/>
+          </svg>
+        <% } %>
       </div>
     <% } %>
     <h1 class="hero-title reveal" style="--i: 1"><%= theme.home.greeting %> <span class="accent"><%= config.author %></span></h1>
@@ -43,6 +35,17 @@
       <span aria-hidden="true">·</span>
       <span><b><%= days %></b> <%= __('days') %></span>
     </p>
+    <% if (decor === 'pixel') {
+      const now = new Date();
+      const start = new Date(now.getFullYear(), 0, 1);
+      const pct = Math.floor((now - start) / (new Date(now.getFullYear() + 1, 0, 1) - start) * 100);
+    %>
+      <p class="xp-bar reveal" style="--i: 4" aria-label="<%= now.getFullYear() %>: <%= pct %>%">
+        <span class="xp-label">LV.<span data-xp-year><%= now.getFullYear() %></span></span>
+        <span class="xp-track" aria-hidden="true"><% for (let k = 0; k < 20; k++) { %><i<%= k < Math.round(pct / 5) ? ' class="on"' : '' %>></i><% } %></span>
+        <span class="xp-label"><span data-xp-pct><%= pct %></span>%</span>
+      </p>
+    <% } %>
     <% if (Object.values(theme.social || {}).some(Boolean)) { %>
       <p class="hero-social reveal" style="--i: 5">
         <% for (const name in theme.social) { const url = theme.social[name]; if (!url) continue; %>

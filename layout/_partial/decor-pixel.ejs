@@ -1,0 +1,12 @@
+<%# 8-bit touches: twinkling pixel sparkles. The avatar cursor and XP bar live in index.ejs. %>
+<%
+  // [left %, top %, scale, delay s]
+  const sparks = [[12, 22, 3, 0], [22, 70, 2, 1.2], [80, 18, 2, 0.6], [88, 62, 3, 1.8], [70, 84, 2, 2.4], [32, 12, 2, 3]];
+%>
+<div class="hero-decor decor-pixel-bg" aria-hidden="true">
+  <% sparks.forEach(function (s) { %>
+    <svg class="spark" viewBox="0 0 5 5" shape-rendering="crispEdges" style="left: <%= s[0] %>%; top: <%= s[1] %>%; width: <%= s[2] * 5 %>px; height: <%= s[2] * 5 %>px; --delay: <%= s[3] %>s">
+      <path d="M2 0h1v2h2v1H3v2H2V3H0V2h2z"/>
+    </svg>
+  <% }) %>
+</div>

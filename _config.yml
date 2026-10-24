@@ -22,6 +22,8 @@ home:
   recent: 8
   # Number of essays shown on the home page.
   essays: 3
+  # Hero decoration: print (proof-sheet marks), pixel (8-bit touches) or none.
+  decor: print
 
 social:
   # name: url  (supported icons: github, email, twitter, rss, link)

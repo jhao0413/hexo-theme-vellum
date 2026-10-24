@@ -39,6 +39,12 @@ search:
 
 Override any key from the theme's [`_config.yml`](./_config.yml) in a `_config.vellum.yml` file at the site root.
 
+The home hero has two decoration styles, set with `home.decor`:
+
+- `print`: a printer's proof sheet, with crop marks, registration marks, a faint baseline grid, a color bar and a slug line
+- `pixel`: 8-bit touches, with a pixel selection cursor around the avatar, twinkling pixel sparkles and an XP bar showing how far through the year it is
+- `none`: no decoration
+
 ## Pages
 
 | Page | Front matter |
