@@ -16,6 +16,8 @@ menu:
 home:
   greeting: Hi, I'm
   bio:
+  # Fixed quote under the bio. Takes priority over quote_from_essays.
+  quote:
   # Show the latest entry of source/_data/essays.yml as a quote under the bio.
   quote_from_essays: true
   # Number of posts listed under "Recent Writing".

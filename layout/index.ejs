@@ -18,9 +18,9 @@
     <% } %>
     <h1 class="hero-title reveal" style="--i: 1"><%= theme.home.greeting %> <span class="accent"><%= config.author %></span></h1>
     <% if (theme.home.bio) { %><p class="hero-bio reveal" style="--i: 2"><%= theme.home.bio %></p><% } %>
-    <% if (theme.home.quote_from_essays && essays.length) { %>
+    <% if (theme.home.quote || (theme.home.quote_from_essays && essays.length)) { %>
       <blockquote class="hero-quote reveal" style="--i: 3">
-        <p>「<%= essays[0].content %>」</p>
+        <p>「<%= theme.home.quote || essays[0].content %>」</p>
       </blockquote>
     <% } %>
     <p class="hero-stats reveal" style="--i: 4">
