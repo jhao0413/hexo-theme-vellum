@@ -20,6 +20,7 @@
       if (t === 'dark' || t === 'light') document.documentElement.dataset.theme = t;
     } catch (e) {}
   </script>
+  <link rel="stylesheet" href="<%- url_for('/css/fonts.css') %>">
   <link rel="stylesheet" href="<%- url_for('/css/style.css') %>">
   <% (theme.head_inject || []).forEach(function (html) { %><%- html %>
   <% }) %>
