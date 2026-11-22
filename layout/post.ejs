@@ -27,6 +27,13 @@
       </p>
     </header>
 
+    <% if (tocHtml) { %>
+      <details class="post-toc-inline">
+        <summary><%= __('contents') %></summary>
+        <nav aria-label="<%= __('contents') %>"><%- tocHtml %></nav>
+      </details>
+    <% } %>
+
     <div class="prose">
       <%- page.content %>
     </div>

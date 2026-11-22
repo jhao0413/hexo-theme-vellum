@@ -12,6 +12,9 @@ search: Search
 search_placeholder: Search posts…
 search_empty: No matching posts
 search_hint: Type to search
+search_close: Close search
+search_loading: Loading search…
+search_error: Could not load search. Edit your query to retry.
 toggle_theme: Toggle theme
 menu: Menu
 skip: Skip to content
